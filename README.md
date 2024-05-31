@@ -24,24 +24,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/naity/protein-transformer">
-    <img src="images/logo.png" alt="Logo" width="150" height="150">
+  <a href="https://github.com/naity/fundamental-ml">
+    <img src="images/logo.jpg" alt="Logo" width="150" height="150">
   </a>
  
-<h3 align="center">Protein-Transformer</h3>
+<h3 align="center">Fundamental ML</h3>
 
   <p align="center">
-    Implement, train, tune, and evaluate a transformer model for antibody classification with this step-by-step code.
+    Fundamental machine learning algorithms implemented from scratch in Python using NumPy and PyTorch.
     <br />
     <br />
     <br />
-    <a href="https://towardsdatascience.com/building-transformer-models-for-proteins-from-scratch-60884eab5cc8">Read on Medium </a>
+    <a href="https://github.com/naity/fundamental-ml/issues">Report Bug</a>
     ·
-    <a href="https://open.substack.com/pub/ytian/p/building-transformer-models-for-proteins?r=2mh9ns&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true">Read on Substack</a>
-    ·
-    <a href="https://github.com/naity/protein-transformer/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/naity/protein-transformer/issues">Request Feature</a>
+    <a href="https://github.com/naity/fundamental-ml/issues">Request Feature</a>
   </p>
 </div>
 
@@ -77,13 +73,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project provides a step-by-step guide to implementing a transformer model for protein data, covering training, hyperparameter tuning, and evaluation. 
-
-**Highlights**
-
-* **Hands-on Transformer Implementation:** Follow along with code to build a transformer-based antibody classifier.
-* **Optimize Performance:** Explore hyperparameter tuning techniques to improve the model's accuracy.
-* **Evaluation:** Assess the model's generalization ability and gain insights into its performance on a hold-out test dataset.
+Fundamental machine learning algorithms implemented from scratch in Python using NumPy or PyTorch. Learn the core principles of ML through hands-on coding.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,11 +83,7 @@ This project provides a step-by-step guide to implementing a transformer model f
 
 * [![Python][Python_badge]][Python-url]
 * [![Pytorch][Pytorch_badge]][Pytorch-url]
-* [![Ray][Ray_badge]][Ray-url]
-* [![scikit-learn][scikit-learn_badge]][scikit-learn-url]
-* [![Pandas][pandas_badge]][pandas-url]
 * [![NumPy][numpy_badge]][numpy-url]
-* [![Typer][typer_badge]][typer-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -108,7 +94,7 @@ This project provides a step-by-step guide to implementing a transformer model f
 
 Clone the repo:
 ```sh
-git clone https://github.com/naity/protein-transformer.git
+git clone https://github.com/naity/fundamental-ml.git
 ```
 
 ### Prerequisites
@@ -124,106 +110,13 @@ The `requirements.txt` file lists the Python packages that need to be installed 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-In this project, we will implement, train, optimize, and evaluate a transformer-based model for antibody classification. The data has been preprocessed, formatted as a binary classification problem with a balanced number of samples in each class. Processed datasets are stored in the `data/` directory: `bcr_train.parquet` is used for training and tuning, while `bcr_test.parquet` is the hold-out test dataset. For details on the preprocessing steps, please refer to the `notebooks/bcr_preprocessing.ipynb` notebook.
+Each Jupyter Notebook (.ipynb) in this repository provides an implementation and exploration of a fundamental machine learning algorithm:
 
-**1. Running the `train.py` Script**
+* ⚙️**Implementation**: Python code using NumPy/PyTorch.
+* 🧪**Experimentation**: Apply the algorithm to example datasets.
+* 📊**Plotting**: Visualize results and key concepts.
 
-See the table below for key parameters when running the `train.py` script. For a full list of options, run:
-
-```sh
-python protein_transformer/train.py --help 
-```
-
-| Parameter | Description | Default|
-| -------- | ------- | ------- |
-|--run-id | Unique name for the training run | None (Required)
-|--dataset-loc | Path to the dataset in parquet format | None (Required)
-|--val-size | Proportion of the dataset for validation | 0.15
-|--embedding-dim | Dimensionality of token embeddings | 64
-|--num-layers | Number of Transformer encoder layers | 8
-|--num-heads | Number of attention heads in the encoder | 2
-|--ffn-dim | Dimensionality of the feed-forward layer in the encoder | 128
-|--dropout | Dropout probability for regularization | 0.05
-|--batch-size | Number of samples per batch for each worker | 32
-|--lr | The learning rate for the optimizer | 2e-5
-|--num-epochs | Number of epochs for training | 20
-
-For example, to execute the training script with default parameters and store the results under a run ID named `train01`, use the following command:
-
-```sh
-python protein_transformer/train.py --run-id train01 --dataset-loc data/bcr_train.parquet
-``` 
-
-Upon completion, the script stores training results in the `runs/train01` directory by default. This includes model arguments, the best-performing model (based on validation loss), training and validation loss records, along with validation metrics for each epoch. These metrics, which include the following, are saved in the `runs/train01/results.csv` file:
-
-```
-Accuracy: 0.727
-AUC score: 0.851
-Precision: 0.734
-Recall: 0.727
-F1-score: 0.725
-```
-
-
-**2. Running the `tune.py` Script**
-
-See the table below for key parameters when running the `tune.py` script. For a full list of options, run:
-
-```sh
-python protein_transformer/tune.py --help 
-```
-
-| Parameter | Description | Default|
-| -------- | ------- | ------- |
-|--run-id | Unique name for the hyperparameter tuning run | None (Required)|
-|--dataset-loc | Absolute path to the dataset in parquet format | None (Required)|
-|--val-size | Proportion of the dataset for validation | 0.15|
-|--num-classes | Number of final output dimensions | 2|
-|--batch-size | Number of samples per batch for each worker | 32|
-|--num-epochs | Number of epochs for training (per trial) | 30|
-|--num-samples | Number of trials for tuning | 100|
-|--gpu-per-trial | Number of GPUs to allocate per trial | 0.2|
-
-* Note: The --dataset-loc parameter must be specified as an absolute path.
-
-For example, to initiate the tuning process with default parameters and store the results under a run ID named `tune01`, execute the `tune.py` script from the project root directory:
-
-```sh
-python protein_transformer/tune.py --run-id tune01 --dataset-loc /home/ytian/github/protein-transformer/data/bcr_train.parquet
-```
-
-By default, it will execute 100 trials with different parameter combinations, running each trial for up to 30 epochs. Ray Tune utilizes early stopping for unpromising trials, allowing for efficient exploration of the hyperparameter space and focuses resources on better-performing configurations. It will track the results of each trial, and upon completion, the best-performing model based on validation loss will be saved in the `runs/tune01` directory by default. Additionally, tuning logs, including results from each trial, are stored within the same `runs/tune01` directory for easy access and analysis.
-
-
-**3. Running the `evaluate.py` Script**
-
-See the table below for key parameters when running the `evaluate.py` script. For a full list of options, run:
-
-```sh
-python protein_transformer/evaluate.py --help 
-```
-| Parameter | Description | Default|
-| -------- | ------- | ------- |
-|--run-dir | Path to the output directory for a training or tuning run | None (Required)|
-|--dataset-loc | Path to the test dataset in parquet format | None (Required)|
-|--batch-size | Number of samples per batch | 64|
-  
-
-For example, to evaluate the best model from the `tune01` run on the hold-out test dataset, execute the following command from the command line:
-
-```sh
-python protein_transformer/evaluate.py --run-dir runs/tune01 --dataset-loc /home/ytian/github/protein-transformer/data/bcr_test.parquet
-```
-
-Upon completion, the script will save test metrics in a file named `test_metrics.json`, like the following example, within the  run directory provided in the `evaluate.py` command:
-
-```
-Accuracy: 0.761
-AUC score: 0.837
-Precision: 0.761
-Recall: 0.761
-F1-score: 0.761
-```
+*Note: Ensure Jupyter Notebook and the required libraries in `requirements.txt` are installed before running the notebooks.*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -232,11 +125,8 @@ F1-score: 0.761
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Data Processing
-- [x] Model Implementation
-- [x] Training
-- [x] Hyperparameter Tuning
-- [x] Evaluation
+- [x] K-means
+- [] KNN
 
 See the [open issues](https://github.com/naity/finetune-esm/issues) for a full list of proposed features (and known issues).
 
@@ -288,9 +178,7 @@ Distributed under the Apache License. See `LICENSE.txt` for more information.
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [IEDB](https://www.iedb.org/)
-* [UvA Deep Learning](https://uvadlc-notebooks.readthedocs.io/en/latest/index.html)
-* [Made With ML](https://madewithml.com/)
+* [Machine Learning Specialization](https://www.deeplearning.ai/courses/machine-learning-specialization/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
