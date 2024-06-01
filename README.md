@@ -110,7 +110,7 @@ The `requirements.txt` file lists the Python packages that need to be installed 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Each Jupyter Notebook (.ipynb) in this repository provides an implementation and exploration of a fundamental machine learning algorithm:
+Each Jupyter Notebook (.ipynb) in the `fundamental_ml` provides an implementation and exploration of a fundamental machine learning algorithm:
 
 * ⚙️**Implementation**: Python code using NumPy/PyTorch.
 * 🧪**Experimentation**: Apply the algorithm to example datasets.
@@ -126,7 +126,7 @@ Each Jupyter Notebook (.ipynb) in this repository provides an implementation and
 ## Roadmap
 
 - [x] K-means
-- [] KNN
+- [ ] KNN
 
 See the [open issues](https://github.com/naity/finetune-esm/issues) for a full list of proposed features (and known issues).
 
